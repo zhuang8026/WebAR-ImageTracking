@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TrackingImage_v2_3</title>
+
+    <!-- aframe -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script> -->
+    <!-- nft -->
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script> -->
+
+    <script src="js/aframe.min.js"></script>
+    <script src="js/aframe-ar-nft.js"></script>
+
+    <style>
+        .arjs-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .arjs-loader div {
+            text-align: center;
+            font-size: 1.25em;
+            color: white;
+        }
+    </style>
+</head>
+<body style="margin : 0px; overflow: hidden;">
+    <div class="arjs-loader">
+        <div>Loading, please wait...</div>
+    </div>
+
+    <a-scene
+        vr-mode-ui="enabled: false;"
+        renderer="logarithmicDepthBuffer: true; precision: medium;"
+        embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
+        device-orientation-permission-ui="enabled: false"
+        gltf-model="dracoDecoderPath: draco/gltf/"
+    >
+        <!-- <a-assets>
+            <a-asset-item id="ROG" src="model/Armoury_mouse-ROG.gltf"></a-asset-item>
+        </a-assets> -->
+        <a-nft
+            id="nft_1"
+            type='nft'
+            url=''
+            smooth="true"
+            smooth-count="20"
+            smooth-tolerance="0.01"
+            smooth-threshold="5"
+        >
+            <a-entity
+                gltf-model="model/draco/Gagarin_Draco.gltf"
+                scale="1 1 1"
+                position="85 50 -200"
+                rotation="0 0 0"
+                animation="property: rotation;from: 0 0 0;to: 0 359 0; loop: true; dur: 10000; easing: linear"
+            >
+            </a-entity>
+        </a-nft>
+
+        <a-entity light="color: #fff;intensity:3" position="0 4 10"></a-entity>
+        <a-entity light="color: #fff;intensity:3" position="60 0 -200"></a-entity>
+        <a-entity light="color: #fff;intensity:3" position="30 0 0"></a-entity>
+        <a-entity light="color: #fff;intensity:3" position="30 30 -200"></a-entity>
+        <a-entity light="color: #fff;intensity:3" position="30 30 -200"></a-entity>
+
+        <!-- camera -->
+        <a-entity camera></a-entity>
+    </a-scene>
+
+    <script>
+        function setMarker(){
+            var nft_1 = document.getElementById("nft_1");
+            var url_1 = window.location.href;
+            if(url_1.indexOf(".html")!=-1){
+                var array = url_1.split("/")
+                url_1=url_1.replace(array[array.length-1],"");
+            }
+            url_1 += "trex/zenbook-7"
+            nft_1.setAttribute("url",url_1);
+            console.log(nft_1.getAttribute("url"));
+        }
+        setMarker();
+
+    </script>
+</body>
+</html>
